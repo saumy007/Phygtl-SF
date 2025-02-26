@@ -7,7 +7,7 @@
 <h2>Steps to Install</h2>
 <ol>
     <li><strong>Clone the Repository</strong>
-        <pre><code>git clone &lt;repository_url&gt;</code></pre>
+        <pre><code>git clone &lt;https://github.com/saumy007/Phygtl-SF.git&gt;</code></pre>
     </li>
     <li>Open <strong>Unity Hub</strong></li>
     <li>Click on <strong>Add Existing Folder</strong></li>
