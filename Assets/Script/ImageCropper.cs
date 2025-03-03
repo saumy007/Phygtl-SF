@@ -17,7 +17,15 @@ public class ImageCropper : MonoBehaviour
     [SerializeField] private Button Btn2;
     [SerializeField] private Button Btn3;
 
+    [SerializeField] private Button Leaderboard;
+
+
+
     private Vector3 btn1OriginalPos, btn2OriginalPos, btn3OriginalPos;
+    private Vector3 btn1OriginalScale, btn3OriginalScale, btn2OriginalScale;
+    private Vector3 leaderboardScale;
+    private Vector3 leaderboardOriginalPos;
+
 
     [Header("Crop Settings")]
     [SerializeField] [Range(0, 1)] private float cropAmount = 0.5f;
@@ -57,8 +65,15 @@ public class ImageCropper : MonoBehaviour
         }
 
         btn1OriginalPos = Btn1.transform.localPosition;
+        btn1OriginalScale = Btn1.transform.localScale;
         btn2OriginalPos = Btn2.transform.localPosition;
+        btn2OriginalScale = Btn2.transform.localScale;
         btn3OriginalPos = Btn3.transform.localPosition;
+        btn3OriginalScale = Btn3.transform.localScale;
+
+        leaderboardOriginalPos = Leaderboard.transform.localPosition;
+        leaderboardScale = Leaderboard.transform.localScale;
+
     }
 
     private void Update()
@@ -103,6 +118,7 @@ public class ImageCropper : MonoBehaviour
         Debug.Log("The place of target is here" + targetImageBG.transform.position.ToString());
         MovementScript();
         MoveButtons(true);
+        leaderBoardUI(true);
         textFade();
     }
 
@@ -115,7 +131,8 @@ public class ImageCropper : MonoBehaviour
 
         CanvasGroup canvasGroup = desc.GetComponent<CanvasGroup>();
 
-        header.rectTransform.DOLocalMoveY(106f, cropDuration).SetEase(Ease.InOutQuad);
+        header.rectTransform.DOLocalMoveY(29f, cropDuration).SetEase(Ease.InOutQuad);
+
 
 
 
@@ -131,13 +148,37 @@ public class ImageCropper : MonoBehaviour
 
     private void MoveButtons(bool moveUp)
     {
-        Vector3 btn1Target = moveUp ? new Vector3(23, 908, 0) : btn1OriginalPos;
-        Vector3 btn2Target = moveUp ? new Vector3(23, 908, 0) : btn2OriginalPos;
-        Vector3 btn3Target = moveUp ? new Vector3(365, 908, 0) : btn3OriginalPos;
+
+        // changing original position
+
+        Vector3 btn1Target = moveUp ? new Vector3(233, 1140, 0) : btn1OriginalPos;
+        Vector3 btn2Target = moveUp ? new Vector3(233, 1140, 0) : btn2OriginalPos;
+        Vector3 btn3Target = moveUp ? new Vector3(575, 1140, 0) : btn3OriginalPos;
+
+        //changing original scale to new scale
+        Vector3 btn1Scale = moveUp ? new Vector3(1.08f, 1.08f, 0) : btn1OriginalScale;
+        Vector3 btn2Scale = moveUp ? new Vector3(1.08f, 1.08f, 0) : btn2OriginalScale;
+        Vector3 btn3Scale = moveUp ? new Vector3(1.08f, 1.08f, 0) : btn3OriginalScale;
 
         Btn1.transform.DOLocalMove(btn1Target, cropDuration);
         Btn2.transform.DOLocalMove(btn2Target, cropDuration);
         Btn3.transform.DOLocalMove(btn3Target, cropDuration);
+
+        Btn1.transform.DOScale(btn1Scale, cropDuration);
+        Btn2.transform.DOScale(btn2Scale, cropDuration);
+        Btn3.transform.DOScale(btn3Scale, cropDuration);
+
+    }
+
+    
+
+    private void leaderBoardUI(bool moveUp)
+    {
+        Vector3 leaderBoardTarget = moveUp ? new Vector3(32, -284, 0) : leaderboardOriginalPos;
+        Vector3 leaderboardScale = moveUp ? new Vector3(1.05f, 1.05f, 0) : btn1OriginalScale;
+        Leaderboard.transform.DOLocalMove(leaderBoardTarget, cropDuration);
+        Leaderboard.transform.DOScale(leaderboardScale, cropDuration);
+        
     }
 
     //private void threebtns() 
@@ -173,8 +214,9 @@ public class ImageCropper : MonoBehaviour
         targetImage.rectTransform.DOSizeDelta(originalSize, cropDuration).SetEase(Ease.InOutQuad);
         targetImageBG.rectTransform.DOSizeDelta(originalSizeBG, cropDuration).SetEase(Ease.InOutQuad);
         MoveButtons(false);
+        leaderBoardUI(false);
 
-        header.rectTransform.DOLocalMoveY(12, cropDuration).SetEase(Ease.InOutQuad);
+        header.rectTransform.DOLocalMoveY(-146, cropDuration).SetEase(Ease.InOutQuad);
     }
 
     private void ResetTextFade()
