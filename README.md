@@ -1,3 +1,4 @@
+<h2>About Project</h2>
 <h5>
     I demonstrated the use of Dotween Plugin to make Animations and scrolling in unity app possible in Unity 6  
 </h5>
