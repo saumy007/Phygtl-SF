@@ -3,7 +3,9 @@
     <li>Install <strong>Unity 6.0</strong></li>
     <li>Install <strong>Unity Hub</strong></li>
 </ul>
-
+<h5>
+    I demonstrated the use of Dotween Plugin to make Animations and scrolling in unity app possible in Unity 6  
+</h5>
 <h2>Steps to Install</h2>
 <ol>
     <li><strong>Clone the Repository</strong>
